@@ -1,4 +1,5 @@
 body {
+<<<<<<< HEAD
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
 }
@@ -47,4 +48,147 @@ button:hover {
     text-align: center;
     font-weight: bold;
     margin-top: 10px;
+=======
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  background: linear-gradient(blue, rgb(82, 82, 206), rgb(49, 49, 131));
+}
+
+.container h1{
+    color: wheat;
+}
+
+.center_it {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
+.result {
+  width: 500px;
+  height: 400px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+.show {
+  object-fit: contain;
+  display: block;
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+}
+.show img {
+  width: auto;
+  height: 250px;
+  background-color: inherit;
+  object-fit: contain;
+}
+
+.error img {
+  mix-blend-mode: multiply !important;
+}
+
+.mtn p {
+  color: yellow;
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.airtel p {
+  color: rgb(156, 14, 14);
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.glo p {
+  color: green;
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 20px;
+}
+.etisalat p {
+  color: greenyellow;
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.error p {
+  color: red;
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.numberForm {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  box-shadow: .5px .1px .1px 1px white;
+}
+
+.number {
+  display: flex;
+  flex-flow: column;
+  height: auto;
+  justify-content: space-around;
+}
+.number label {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: wheat;
+  margin-bottom: 10px;
+}
+.number input,
+.number input:active,
+.number input:focus {
+  outline: none;
+  background: inherit;
+  font-size: 1.2rem;
+  color: white;
+  padding: 1rem;
+}
+.button {
+  margin-top: 10px;
+}
+.button button {
+  padding: 0.6rem 3rem;
+  background: inherit;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+>>>>>>> 27f1b4a (Adding styles and a little js code)
 }
