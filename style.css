@@ -1,54 +1,4 @@
 body {
-<<<<<<< HEAD
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-}
-
-.container {
-    background-color: #fff;
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-h1 {
-    text-align: center;
-}
-
-form {
-    text-align: center;
-}
-
-label {
-    font-weight: bold;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-}
-
-button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#result {
-    text-align: center;
-    font-weight: bold;
-    margin-top: 10px;
-=======
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -190,5 +140,4 @@ button:hover {
   color: white;
   font-weight: bold;
   font-size: 20px;
->>>>>>> 27f1b4a (Adding styles and a little js code)
 }
