@@ -1,74 +1,124 @@
-function detectNumber() {
-    const phoneNumber = document.getElementById('phoneNumber').value;
-    const result = document.getElementById('result');
+let phone_number = document.querySelector("#phoneNumber");
 
-    if (phoneNumber !== '') {
-        let number = phoneNumber.split(" ").join('');
+const AddHidehelperFunction = (id) => {
+  const val = document.querySelector(`.${id}`);
+  const isTHere = val.classList.contains("hide");
+  if (!isTHere) {
+    val.classList.remove("show");
+    val.classList.add("hide");
+  }
+};
 
-        if (number.length >= 11) {
-            if (number.substring(0, 4) === "+234") {
-                number = '0' + number.slice(4);
-            }
-            const prefix = number.substring(0, 4);
-            let imageSource = getOperatorImageSource(prefix);
+const AddShowHelperFunction = (id) => {
+  const val = document.querySelector(`.${id}`);
+  const isTHere = val.classList.contains("show");
+  if (!isTHere) {
+    val.classList.remove("hide");
+    val.classList.add("show");
+  }
+};
+const HideAll = () => {
+  AddHidehelperFunction("error");
+  AddHidehelperFunction("airtel");
+  AddHidehelperFunction("mtn");
+  AddHidehelperFunction("glo");
+  AddHidehelperFunction("etisalat");
+  AddHidehelperFunction("welcome");
+};
 
-            // Create an image element
-            let img = new Image();
-            img.src = imageSource;
-            img.width = 100; 
-            img.height = 100; 
+const NumberHandler = () => {
+  if (phone_number.value.length < 10) {
+    HideAll();
+    AddShowHelperFunction("error");
+    return;
+  }
+  let number = phone_number.value.trim();
+  let splittedNum = number.split("");
+  const country_code = splittedNum.slice(1, 4).join("");
+  if (!(country_code === "+234") && splittedNum[0] === "0") {
+    let spliced_number = splittedNum.slice(1);
+    number = `+234` + spliced_number.join("");
+  }
 
-           
-            result.textContent = '';
+  if (number.length !== 14) {
+    HideAll();
+    AddShowHelperFunction("error");
+    return;
+  }
+  const serverNum = number.replace("+234", "0");
+  const regEx = /^[0-9\+]+$/;
+  const exist = regEx.test(serverNum);
+  //if exist is false
+  if (exist === false) {
+    HideAll();
+    AddShowHelperFunction("error");
+    return;
+  }
+  const prefix = serverNum.substring(0, 4);
+  return getOperatorImageSource(prefix);
+};
 
-            
-            result.appendChild(img);
-        } else {
-            result.textContent = 'Please enter a valid phone number.';
-        }
-    } else {
-        result.textContent = 'Phone number field cannot be empty.';
-    }
-}
+document.querySelector("form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  return NumberHandler();
+});
+
+document.querySelector("input").addEventListener("change", (event) => {
+  event.preventDefault();
+
+  if (phone_number.value.length === 0) {
+    HideAll();
+    AddShowHelperFunction("welcome");
+    return;
+  }
+  return NumberHandler();
+});
+document.querySelector("button").addEventListener("click", NumberHandler);
 
 function getOperatorImageSource(prefix) {
-    switch (prefix) {
-        case '0803':
-        case '0703':
-        case '0903':
-        case '0806':
-        case '0706':
-        case '0813':
-        case '0810':
-        case '0814':
-        case '0816':
-            return 'mtn.png'; 
+  console.log(prefix);
+  switch (prefix) {
+    case "0803":
+    case "0703":
+    case "0903":
+    case "0806":
+    case "0706":
+    case "0813":
+    case "0810":
+    case "0814":
+    case "0816":
+      HideAll();
+      AddShowHelperFunction("mtn");
+      break;
+    case "0805":
+    case "0705":
+    case "0905":
+    case "0807":
+    case "0815":
+    case "0811":
+    case "0905":
+      HideAll();
+      AddShowHelperFunction("glo");
+      break;
+    case "0809":
+    case "0909":
+    case "0817":
+    case "0818":
+      HideAll();
+      AddShowHelperFunction("etisalat");
+      break;
+    case "0802":
+    case "0902":
+    case "0701":
+    case "0808":
+    case "0708":
+    case "0812":
+      HideAll();
+      AddShowHelperFunction("airtel");
+      break;
 
-        case '0805':
-        case '0705':
-        case '0905':
-        case '0807':
-        case '0815':
-        case '0811':
-        case '0905':
-            return 'Glo_Limited.png'; 
-
-        case '0809':
-        case '0909':
-        case '0817':
-        case '0818':
-            return '9mobile.png'; 
-
-        case '0802':
-        case '0902':
-        case '0701':
-        case '0808':
-        case '0708':
-        case '0812':
-            return 'airtel.png'; 
-
-        default:
-            return ''; 
-    }
+    default:
+      HideAll();
+      AddShowHelperFunction("error");
+  }
 }
-
