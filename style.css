@@ -11,7 +11,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-flow: column;
-  background: linear-gradient(blue, rgb(82, 82, 206), rgb(49, 49, 131));
+  background: linear-gradient(rgb(148, 148, 182), rgb(167, 167, 235), rgb(197, 197, 238));
 }
 
 .container h1{
@@ -56,48 +56,31 @@ body {
   mix-blend-mode: multiply !important;
 }
 
-.mtn p {
-  color: yellow;
+.center-logo {
   width: 100%;
   text-align: center;
   font-weight: 800;
   font-style: italic;
   font-size: 20px;
+}
+
+.mtn p {
+  color: yellow;
 }
 
 .airtel p {
   color: rgb(156, 14, 14);
-  width: 100%;
-  text-align: center;
-  font-weight: 800;
-  font-style: italic;
-  font-size: 20px;
 }
 
 .glo p {
   color: green;
-  width: 100%;
-  text-align: center;
-  font-weight: 800;
-  font-style: italic;
-  font-size: 20px;
 }
 .etisalat p {
   color: greenyellow;
-  width: 100%;
-  text-align: center;
-  font-weight: 800;
-  font-style: italic;
-  font-size: 20px;
 }
 
 .error p {
   color: red;
-  width: 100%;
-  text-align: center;
-  font-weight: 800;
-  font-style: italic;
-  font-size: 20px;
 }
 
 .numberForm {
