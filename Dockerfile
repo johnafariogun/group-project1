@@ -1,5 +1,5 @@
-# Stage 1: FastAPI App
-FROM python:3.9-slim AS fastapi
+# Base image
+FROM python:3.10
 
 WORKDIR /app
 
@@ -7,22 +7,19 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application files
+# Copy FastAPI app
 COPY . .
 
-# Expose FastAPI port
-EXPOSE 8000
+# Install Nginx & Supervisor
+RUN apt-get update && apt-get install -y nginx supervisor && rm -rf /var/lib/apt/lists/*
 
-# Run Uvicorn server
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
-# Stage 2: 
-FROM nginx:alpine
-
-# Copy custom Nginx config
+# Remove default Nginx config and add custom config
+RUN rm /etc/nginx/sites-enabled/default
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose Nginx port
-EXPOSE 80
+# Copy Supervisor config
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80 8000
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
