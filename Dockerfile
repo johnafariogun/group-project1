@@ -1,25 +1,24 @@
-# Base image
-FROM python:3.10
+# Use official Python image
+FROM python:3.9
 
+# Set working directory
 WORKDIR /app
 
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy FastAPI app
+# Copy project files
 COPY . .
 
-# Install Nginx & Supervisor
-RUN apt-get update && apt-get install -y nginx supervisor && rm -rf /var/lib/apt/lists/*
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Remove default Nginx config and add custom config
-RUN rm /etc/nginx/sites-enabled/default
+# Install Nginx
+RUN apt update && apt install -y nginx && rm -rf /var/lib/apt/lists/*
+
+# Copy Nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy Supervisor config
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Expose the necessary ports
+EXPOSE 80
 
-EXPOSE 80 8000
+# Start Nginx and FastAPI together
+CMD service nginx start && uvicorn main:app --host 0.0.0.0 --port 8000
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
