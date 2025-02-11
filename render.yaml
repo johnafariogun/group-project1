@@ -1,0 +1,15 @@
+services:
+  - name: fastapi-backend
+    type: web
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    healthCheckPath: /healthcheck
+
+  - name: nginx-proxy
+    type: web
+    runtime: docker
+    dockerfilePath: ./Dockerfile.nginx
+    envVars:
+      - key: RENDER_EXTERNAL_URL
+        sync: false
